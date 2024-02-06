@@ -122,6 +122,22 @@ const tree = (array) => {
     }
   };
 
+  const find = (value) => {};
+
+  const levelOrder = (callback) => {};
+
+  const inOrder = (callback) => {};
+  const preOrder = (callback) => {};
+  const postOrder = (callback) => {};
+
+  const height = (node) => {};
+
+  const depth = (node) => {};
+
+  const isBalanced = () => {};
+
+  const rebalance = () => {};
+
   const sortedArray = mergeSort(array);
 
   const root = buildTree(sortedArray);
@@ -130,6 +146,15 @@ const tree = (array) => {
     root,
     insert,
     remove,
+    find,
+    levelOrder,
+    inOrder,
+    preOrder,
+    postOrder,
+    height,
+    depth,
+    isBalanced,
+    rebalance,
   };
 };
 
@@ -182,14 +207,26 @@ const mergeSort = (array) => {
 const binaryTree = tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 
 binaryTree.insert(112);
-binaryTree.insert(98);
-binaryTree.insert(212);
-binaryTree.insert(7567);
-binaryTree.insert(4321);
-binaryTree.remove(3);
-binaryTree.remove(9);
-binaryTree.remove(324);
+
 binaryTree.remove(4);
+
+// binaryTree.find();
+
+// binaryTree.levelOrder()
+
+// binaryTree.inOrder()
+
+// binaryTree.preOrder()
+
+// binaryTree.postOrder()
+
+// binaryTree.height()
+
+// binaryTree.depth()
+
+// binaryTree.isBalanced()
+
+// binaryTree.rebalance()
 
 // prettyPrint visualizes the binary search tree
 
