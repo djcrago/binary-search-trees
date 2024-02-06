@@ -226,7 +226,28 @@ const tree = (array) => {
     }
   };
 
-  const height = (node) => {};
+  const height = (node, distance = 0) => {
+    if (!node) return;
+
+    if (!node.left && !node.right) return distance;
+
+    distance += 1;
+
+    if (!node.left) return height(node.right, distance);
+
+    if (!node.right) return height(node.left, distance);
+
+    if (node.left && node.right) {
+      let leftDistance = height(node.left, distance);
+      let rightDistance = height(node.right, distance);
+
+      if (leftDistance === rightDistance) return leftDistance;
+      if (leftDistance > rightDistance) return rightDistance;
+      if (leftDistance < rightDistance) return leftDistance;
+    }
+
+    return distance;
+  };
 
   const depth = (node) => {};
 
@@ -308,13 +329,14 @@ binaryTree.remove(4);
 
 // console.log(binaryTree.find(67));
 
-console.log(binaryTree.inOrder());
+// console.log(binaryTree.inOrder());
 
-console.log(binaryTree.preOrder());
+// console.log(binaryTree.preOrder());
 
-console.log(binaryTree.postOrder());
+// console.log(binaryTree.postOrder());
 
-// binaryTree.height()
+const nodeTest = binaryTree.find(8);
+console.log(binaryTree.height(nodeTest));
 
 // binaryTree.depth()
 
