@@ -4,8 +4,9 @@ const newNode = (data, left = null, right = null) => {
 
 const tree = (array) => {
   const buildTree = (array) => {
+    console.log(array);
     if (array.length === 1) {
-      return array[0];
+      return newNode(array[0]);
     }
     if (array.length === 2) {
       const node = newNode(array[0]);
@@ -271,8 +272,6 @@ const tree = (array) => {
   };
 
   const isBalanced = (currentNode = root) => {
-    console.log(currentNode);
-
     if (!currentNode.left && !currentNode.right) return true;
 
     if (!currentNode.left) {
@@ -299,21 +298,22 @@ const tree = (array) => {
       } else {
         let balanced = true;
         balanced = isBalanced(currentNode.left);
-        console.log(balanced);
         if (balanced) {
           balanced = isBalanced(currentNode.right);
         }
-        console.log(balanced);
         return balanced;
       }
     }
   };
 
-  const rebalance = () => {};
+  const rebalance = () => {
+    const array = inOrder();
+    return buildTree(array);
+  };
 
   const sortedArray = mergeSort(array);
 
-  const root = buildTree(sortedArray);
+  let root = buildTree(sortedArray);
 
   return {
     root,
@@ -399,7 +399,7 @@ binaryTree.insert(4);
 
 console.log(binaryTree.isBalanced());
 
-// binaryTree.rebalance()
+binaryTree.root = binaryTree.rebalance();
 
 // prettyPrint visualizes the binary search tree
 
