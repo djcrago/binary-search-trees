@@ -4,7 +4,6 @@ const newNode = (data, left = null, right = null) => {
 
 const tree = (array) => {
   const buildTree = (array) => {
-    console.log(array);
     if (array.length === 1) {
       return newNode(array[0]);
     }
@@ -377,29 +376,62 @@ const mergeSort = (array) => {
 
 //
 
-const binaryTree = tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+const testDrive = () => {
+  const randomArray = [];
 
-binaryTree.insert(112);
+  for (let i = 0; i < 100; i += 1) {
+    let number = Math.floor(Math.random() * 100);
+    randomArray.push(number);
+  }
 
-binaryTree.remove(4);
+  const binaryTree = tree(randomArray);
 
-// console.log(binaryTree.find(67));
+  // confirm tree is balanced
+  console.log(binaryTree.isBalanced());
 
-// console.log(binaryTree.inOrder());
+  // print level, pre, post, and in order
+  function consoleLog(data) {
+    console.log(data);
+  }
 
-// console.log(binaryTree.preOrder());
+  console.log(binaryTree.levelOrder(consoleLog));
+  console.log(binaryTree.preOrder());
+  console.log(binaryTree.postOrder());
+  console.log(binaryTree.inOrder());
 
-// console.log(binaryTree.postOrder());
+  // unbalance the tree by adding several numbers > 100;
 
-// const nodeTest = binaryTree.find(6345);
-// console.log(binaryTree.height(nodeTest));
-// console.log(binaryTree.depth(nodeTest));
+  binaryTree.insert(110);
+  binaryTree.insert(120);
+  binaryTree.insert(130);
+  binaryTree.insert(140);
+  binaryTree.insert(150);
 
-binaryTree.insert(4);
+  // confirm tree is unbalanced
+  console.log(binaryTree.isBalanced(binaryTree.root));
 
-console.log(binaryTree.isBalanced());
+  // balance the tree
+  binaryTree.root = binaryTree.rebalance();
 
-binaryTree.root = binaryTree.rebalance();
+  // confirm tree is balanced
+  console.log(binaryTree.isBalanced(binaryTree.root));
+
+  // print level, pre, post, and in order
+  console.log(binaryTree.levelOrder(consoleLog));
+  console.log(binaryTree.preOrder());
+  console.log(binaryTree.postOrder());
+  console.log(binaryTree.inOrder());
+
+  return binaryTree;
+};
+
+const binaryTree = testDrive();
+
+//
+
+//
+
+//
 
 // prettyPrint visualizes the binary search tree
 
