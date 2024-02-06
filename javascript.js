@@ -25,16 +25,26 @@ const tree = (array) => {
     let currentNode = root;
 
     while (currentNode) {
+      if (value === currentNode.data) {
+        return;
+      }
       if (value > currentNode.data) {
-        currentNode = currentNode.right;
-      } else {
-        currentNode = currentNode.left;
+        if (currentNode.right === null) {
+          currentNode.right = newNode(value);
+          return;
+        } else {
+          currentNode = currentNode.right;
+        }
+      }
+      if (value < currentNode.data) {
+        if (currentNode.left === null) {
+          currentNode.left = newNode(value);
+          return;
+        } else {
+          currentNode = currentNode.left;
+        }
       }
     }
-
-    currentNode = newNode(value);
-
-    return root;
   };
 
   const sortedArray = mergeSort(array);
@@ -96,6 +106,7 @@ const mergeSort = (array) => {
 const binaryTree = tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 
 binaryTree.insert(112);
+binaryTree.insert(6);
 
 // prettyPrint visualizes the binary search tree
 
