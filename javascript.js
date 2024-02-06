@@ -30,18 +30,93 @@ const tree = (array) => {
       }
       if (value > currentNode.data) {
         if (currentNode.right === null) {
-          currentNode.right = newNode(value);
-          return;
-        } else {
-          currentNode = currentNode.right;
+          return (currentNode.right = newNode(value));
         }
+        currentNode = currentNode.right;
       }
       if (value < currentNode.data) {
         if (currentNode.left === null) {
-          currentNode.left = newNode(value);
+          return (currentNode.left = newNode(value));
+        }
+        currentNode = currentNode.left;
+      }
+    }
+  };
+
+  const remove = (value) => {
+    let currentNode = root;
+    let previousNode = null;
+
+    while (currentNode) {
+      if (value > currentNode.data) {
+        if (currentNode.right === null) {
           return;
-        } else {
-          currentNode = currentNode.left;
+        }
+        previousNode = currentNode;
+        currentNode = currentNode.right;
+      }
+      if (value < currentNode.data) {
+        if (currentNode.left === null) {
+          return;
+        }
+        previousNode = currentNode;
+        currentNode = currentNode.left;
+      }
+      if (value === currentNode.data) {
+        if (!currentNode.left && !currentNode.right) {
+          if (value > previousNode.data) {
+            return (previousNode.right = null);
+          }
+          return (previousNode.left = null);
+        }
+
+        if (!currentNode.left) {
+          if (value > previousNode.data) {
+            return (previousNode.right = currentNode.right);
+          }
+          return (previousNode.left = currentNode.right);
+        }
+
+        if (!currentNode.right) {
+          if (value > previousNode.data) {
+            return (previousNode.right = currentNode.left);
+          }
+          return (previousNode.left = currentNode.left);
+        }
+
+        if (currentNode.left && currentNode.right) {
+          // Child with higher value (right) will replace removed node
+          const replacementNode = currentNode.right;
+          // Left node will always connected to this node
+          let leafNode = replacementNode.left;
+          let leftNode = currentNode.left;
+
+          if (!leafNode) {
+            replacementNode.left = leftNode;
+          }
+
+          while (leafNode) {
+            if (leftNode.data > leafNode.data) {
+              if (leafNode.right === null) {
+                leafNode.right = leftNode;
+                break;
+              }
+              leafNode = leafNode.right;
+            }
+
+            if (leftNode.data < leafNode.data) {
+              if (leafNode.left === null) {
+                leafNode.left = leftNode;
+                break;
+              }
+              leafNode = leafNode.left;
+            }
+          }
+
+          if (value > previousNode.data) {
+            return (previousNode.right = replacementNode);
+          }
+          return (previousNode.left = replacementNode);
         }
       }
     }
@@ -54,6 +129,7 @@ const tree = (array) => {
   return {
     root,
     insert,
+    remove,
   };
 };
 
@@ -106,7 +182,14 @@ const mergeSort = (array) => {
 const binaryTree = tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 
 binaryTree.insert(112);
-binaryTree.insert(6);
+binaryTree.insert(98);
+binaryTree.insert(212);
+binaryTree.insert(7567);
+binaryTree.insert(4321);
+binaryTree.remove(3);
+binaryTree.remove(9);
+binaryTree.remove(324);
+binaryTree.remove(4);
 
 // prettyPrint visualizes the binary search tree
 
