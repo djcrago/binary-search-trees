@@ -386,41 +386,41 @@ const testDrive = () => {
 
   const binaryTree = tree(randomArray);
 
-  // confirm tree is balanced
-  console.log(binaryTree.isBalanced());
+  // // confirm tree is balanced
+  // console.log(binaryTree.isBalanced());
 
-  // print level, pre, post, and in order
-  function consoleLog(data) {
-    console.log(data);
-  }
+  // // print level, pre, post, and in order
+  // function consoleLog(data) {
+  //   console.log(data);
+  // }
 
-  console.log(binaryTree.levelOrder(consoleLog));
-  console.log(binaryTree.preOrder());
-  console.log(binaryTree.postOrder());
-  console.log(binaryTree.inOrder());
+  // console.log(binaryTree.levelOrder(consoleLog));
+  // console.log(binaryTree.preOrder());
+  // console.log(binaryTree.postOrder());
+  // console.log(binaryTree.inOrder());
 
-  // unbalance the tree by adding several numbers > 100;
+  // // unbalance the tree by adding several numbers > 100;
 
-  binaryTree.insert(110);
-  binaryTree.insert(120);
-  binaryTree.insert(130);
-  binaryTree.insert(140);
-  binaryTree.insert(150);
+  // binaryTree.insert(110);
+  // binaryTree.insert(120);
+  // binaryTree.insert(130);
+  // binaryTree.insert(140);
+  // binaryTree.insert(150);
 
-  // confirm tree is unbalanced
-  console.log(binaryTree.isBalanced(binaryTree.root));
+  // // confirm tree is unbalanced
+  // console.log(binaryTree.isBalanced(binaryTree.root));
 
-  // balance the tree
-  binaryTree.root = binaryTree.rebalance();
+  // // balance the tree
+  // binaryTree.root = binaryTree.rebalance();
 
-  // confirm tree is balanced
-  console.log(binaryTree.isBalanced(binaryTree.root));
+  // // confirm tree is balanced
+  // console.log(binaryTree.isBalanced(binaryTree.root));
 
-  // print level, pre, post, and in order
-  console.log(binaryTree.levelOrder(consoleLog));
-  console.log(binaryTree.preOrder());
-  console.log(binaryTree.postOrder());
-  console.log(binaryTree.inOrder());
+  // // print level, pre, post, and in order
+  // console.log(binaryTree.levelOrder(consoleLog));
+  // console.log(binaryTree.preOrder());
+  // console.log(binaryTree.postOrder());
+  // console.log(binaryTree.inOrder());
 
   return binaryTree;
 };
