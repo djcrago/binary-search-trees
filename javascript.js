@@ -122,12 +122,48 @@ const tree = (array) => {
     }
   };
 
-  const find = (value) => {};
+  const find = (value) => {
+    let currentNode = root;
 
-  const levelOrder = (callback) => {};
+    while (currentNode) {
+      if (value === currentNode.data) {
+        return currentNode;
+      }
+      if (value > currentNode.data) {
+        if (currentNode.right === null) {
+          return null;
+        }
+        currentNode = currentNode.right;
+      }
+      if (value < currentNode.data) {
+        if (currentNode.left === null) {
+          return null;
+        }
+        currentNode = currentNode.left;
+      }
+    }
+  };
 
-  const inOrder = (callback) => {};
+  const levelOrder = (callback) => {
+    const queue = [];
+    queue.push(root);
+
+    while (queue.length > 0) {
+      callback(queue[0]);
+      if (queue[0].left !== null) queue.push(queue[0].left);
+      if (queue[0].right !== null) queue.push(queue[0].right);
+      queue.shift();
+    }
+  };
+
+  const inOrder = (callback) => {
+    let currentNode = root;
+    if (currentNode.left !== null) {
+    }
+  };
+
   const preOrder = (callback) => {};
+
   const postOrder = (callback) => {};
 
   const height = (node) => {};
@@ -210,11 +246,15 @@ binaryTree.insert(112);
 
 binaryTree.remove(4);
 
-// binaryTree.find();
+console.log(binaryTree.find(67));
 
-// binaryTree.levelOrder()
+function consoleLog(node) {
+  console.log(node.data);
+}
 
-// binaryTree.inOrder()
+binaryTree.levelOrder(consoleLog);
+
+binaryTree.inOrder(consoleLog);
 
 // binaryTree.preOrder()
 
