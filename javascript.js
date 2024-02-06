@@ -156,15 +156,75 @@ const tree = (array) => {
     }
   };
 
-  const inOrder = (callback) => {
-    let currentNode = root;
-    if (currentNode.left !== null) {
+  const inOrder = (callback, currentNode = root) => {
+    if (callback) {
+      if (currentNode === null) return;
+      inOrder(callback, currentNode.left);
+      callback(currentNode);
+      inOrder(callback, currentNode.right);
+    } else {
+      const arrayInOrder = [];
+
+      if (currentNode === null) return;
+
+      const left = inOrder(null, currentNode.left);
+      if (left) arrayInOrder.push(...left);
+
+      arrayInOrder.push(currentNode.data);
+
+      const right = inOrder(null, currentNode.right);
+      if (right) arrayInOrder.push(...right);
+
+      return arrayInOrder;
     }
   };
 
-  const preOrder = (callback) => {};
+  const preOrder = (callback, currentNode = root) => {
+    if (callback) {
+      if (currentNode === null) return;
+      callback(currentNode);
+      preOrder(callback, currentNode.left);
+      preOrder(callback, currentNode.right);
+    } else {
+      const arrayPreOrder = [];
 
-  const postOrder = (callback) => {};
+      if (currentNode === null) return;
+
+      arrayPreOrder.push(currentNode.data);
+
+      const left = preOrder(null, currentNode.left);
+      if (left) arrayPreOrder.push(...left);
+
+      const right = preOrder(null, currentNode.right);
+      if (right) arrayPreOrder.push(...right);
+
+      return arrayPreOrder;
+    }
+  };
+
+  const postOrder = (callback, currentNode = root) => {
+    if (callback) {
+      if (currentNode === null) return;
+
+      postOrder(callback, currentNode.left);
+      postOrder(callback, currentNode.right);
+      callback(currentNode);
+    } else {
+      const arrayPostOrder = [];
+
+      if (currentNode === null) return;
+
+      const left = postOrder(null, currentNode.left);
+      if (left) arrayPostOrder.push(...left);
+
+      const right = postOrder(null, currentNode.right);
+      if (right) arrayPostOrder.push(...right);
+
+      arrayPostOrder.push(currentNode.data);
+
+      return arrayPostOrder;
+    }
+  };
 
   const height = (node) => {};
 
@@ -246,19 +306,13 @@ binaryTree.insert(112);
 
 binaryTree.remove(4);
 
-console.log(binaryTree.find(67));
+// console.log(binaryTree.find(67));
 
-function consoleLog(node) {
-  console.log(node.data);
-}
+console.log(binaryTree.inOrder());
 
-binaryTree.levelOrder(consoleLog);
+console.log(binaryTree.preOrder());
 
-binaryTree.inOrder(consoleLog);
-
-// binaryTree.preOrder()
-
-// binaryTree.postOrder()
+console.log(binaryTree.postOrder());
 
 // binaryTree.height()
 
