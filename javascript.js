@@ -257,9 +257,8 @@ const tree = (array) => {
     let currentNode = root;
 
     while (currentNode) {
-      if (node === currentNode) {
-        return distance;
-      }
+      if (node === currentNode) return distance;
+
       distance += 1;
       if (node.data > currentNode.data) {
         currentNode = currentNode.right;
@@ -271,7 +270,44 @@ const tree = (array) => {
     return distance;
   };
 
-  const isBalanced = () => {};
+  const isBalanced = (currentNode = root) => {
+    console.log(currentNode);
+
+    if (!currentNode.left && !currentNode.right) return true;
+
+    if (!currentNode.left) {
+      if (height(currentNode.right) > 0) {
+        return false;
+      }
+      return true;
+    }
+
+    if (!currentNode.right) {
+      if (height(currentNode.left) > 0) {
+        return false;
+      }
+      return true;
+    }
+
+    if (currentNode.left && currentNode.right) {
+      let leftHeight = height(currentNode.left);
+      let rightHeight = height(currentNode.right);
+
+      let difference = leftHeight - rightHeight;
+      if (difference > 1 || difference < -1) {
+        return false;
+      } else {
+        let balanced = true;
+        balanced = isBalanced(currentNode.left);
+        console.log(balanced);
+        if (balanced) {
+          balanced = isBalanced(currentNode.right);
+        }
+        console.log(balanced);
+        return balanced;
+      }
+    }
+  };
 
   const rebalance = () => {};
 
@@ -355,11 +391,13 @@ binaryTree.remove(4);
 
 // console.log(binaryTree.postOrder());
 
-const nodeTest = binaryTree.find(6345);
+// const nodeTest = binaryTree.find(6345);
 // console.log(binaryTree.height(nodeTest));
-console.log(binaryTree.depth(nodeTest));
+// console.log(binaryTree.depth(nodeTest));
 
-// binaryTree.isBalanced()
+binaryTree.insert(4);
+
+console.log(binaryTree.isBalanced());
 
 // binaryTree.rebalance()
 
