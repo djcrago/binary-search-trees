@@ -123,6 +123,8 @@ const tree = (array) => {
   };
 
   const find = (value) => {
+    if (!value) return;
+
     let currentNode = root;
 
     while (currentNode) {
@@ -249,7 +251,25 @@ const tree = (array) => {
     return distance;
   };
 
-  const depth = (node) => {};
+  const depth = (node, distance = 0) => {
+    if (!node) return;
+
+    let currentNode = root;
+
+    while (currentNode) {
+      if (node === currentNode) {
+        return distance;
+      }
+      distance += 1;
+      if (node.data > currentNode.data) {
+        currentNode = currentNode.right;
+      } else {
+        currentNode = currentNode.left;
+      }
+    }
+
+    return distance;
+  };
 
   const isBalanced = () => {};
 
@@ -335,10 +355,9 @@ binaryTree.remove(4);
 
 // console.log(binaryTree.postOrder());
 
-const nodeTest = binaryTree.find(8);
-console.log(binaryTree.height(nodeTest));
-
-// binaryTree.depth()
+const nodeTest = binaryTree.find(6345);
+// console.log(binaryTree.height(nodeTest));
+console.log(binaryTree.depth(nodeTest));
 
 // binaryTree.isBalanced()
 
